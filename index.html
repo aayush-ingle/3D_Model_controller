@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Model Viewer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside id="toolbar" class="toolbar">
+        <div class="toolbar-header">
+          <h1>3D CAD Viewer</h1>
+        </div>
+        <label class="upload-button">
+          <input id="fileInput" type="file" accept=".obj,.stl" />
+          <span>Load model</span>
+        </label>
+
+        <div id="dropZone" class="drop-zone">
+          Drag .obj or .stl here
+        </div>
+
+        <div id="statusBox" class="status-box">No model loaded</div>
+
+        <div class="controls-panel">
+          <h2>Camera orbit</h2>
+          <div class="rotation-grid">
+            <button data-rotate-x="-15" type="button">Pitch -</button>
+            <button data-rotate-x="15" type="button">Pitch +</button>
+            <button data-rotate-y="-15" type="button">Yaw -</button>
+            <button data-rotate-y="15" type="button">Yaw +</button>
+          </div>
+        </div>
+
+        <div class="controls-panel">
+          <h2>Gesture</h2>
+          <p class="hint-text">Open palm = orbit<br>Pinch = zoom<br>Fist = reset</p>
+        </div>
+
+        <div class="camera-panel">
+          <div class="camera-header">
+            <h2>Hand camera</h2>
+            <button id="startCameraBtn" type="button" class="camera-toggle">Turn on camera</button>
+          </div>
+          <div class="camera-frame">
+            <video id="gestureVideo" autoplay muted playsinline></video>
+          </div>
+          <div id="gestureStatus" class="gesture-status">Camera off</div>
+        </div>
+
+        <div class="controls-panel">
+          <h2>View</h2>
+          <button id="centerModelBtn" type="button">Center model</button>
+          <button id="resetViewBtn" type="button">Reset view</button>
+          <button id="toggleWireframeBtn" type="button">Toggle wireframe</button>
+        </div>
+      </aside>
+
+      <main class="viewport-wrap">
+        <div id="viewer"></div>
+      </main>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./node_modules/three/build/three.module.js",
+          "three/addons/": "./node_modules/three/examples/jsm/"
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

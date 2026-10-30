@@ -1,0 +1,258 @@
+:root {
+  --bg: #05070b;
+  --panel: rgba(18, 22, 31, 0.9);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --text: #ecf1ff;
+  --muted: #a4afc8;
+  --accent: #9cc7ff;
+  --accent-strong: #75a8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Inter, Segoe UI, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  overflow: hidden;
+}
+
+.app-shell {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at top, #101a2d 0%, #05070b 48%, #010205 100%);
+}
+
+.toolbar {
+  width: 280px;
+  min-width: 280px;
+  max-height: 100vh;
+  padding: 20px 18px;
+  background: var(--panel);
+  border-right: 1px solid var(--panel-border);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 199, 255, 0.5) transparent;
+  transition: width 0.25s ease, min-width 0.25s ease, padding 0.25s ease;
+}
+
+.toolbar.collapsed {
+  width: 68px;
+  min-width: 68px;
+  padding: 20px 10px;
+}
+
+.toolbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.toolbar-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.toolbar.collapsed .toolbar-header h1,
+.toolbar.collapsed .drop-zone,
+.toolbar.collapsed .status-box,
+.toolbar.collapsed .controls-panel,
+.toolbar.collapsed .upload-button span,
+.toolbar.collapsed .toolbar-header button {
+  display: none;
+}
+
+.toggle-sidebar {
+  width: auto;
+  min-width: 88px;
+  margin-top: 0;
+  padding: 8px 10px;
+  font-size: 0.75rem;
+}
+
+.toolbar.collapsed .toggle-sidebar {
+  display: block;
+  min-width: 48px;
+  width: 48px;
+  padding: 8px 4px;
+}
+
+.toolbar h2 {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.upload-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(156, 199, 255, 0.35);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(34, 45, 69, 0.95), rgba(16, 21, 31, 0.95));
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.upload-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(156, 199, 255, 0.8);
+}
+
+.upload-button input {
+  display: none;
+}
+
+.drop-zone {
+  padding: 12px 10px;
+  border: 1px dashed rgba(156, 199, 255, 0.4);
+  border-radius: 10px;
+  background: rgba(156, 199, 255, 0.04);
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.status-box {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  color: var(--muted);
+  border: 1px solid var(--panel-border);
+  font-size: 0.82rem;
+}
+
+.controls-panel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 14px 12px;
+}
+
+.controls-panel p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.camera-panel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.camera-header h2 {
+  margin: 0;
+}
+
+.camera-toggle {
+  width: auto;
+  min-width: 110px;
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+}
+
+.camera-frame {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(156, 199, 255, 0.25);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+#gestureVideo {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #000;
+  transform: scaleX(-1);
+}
+
+.gesture-status {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  min-height: 1.2em;
+}
+
+.hint-text {
+  margin: 0;
+  line-height: 1.5;
+}
+
+button {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  background: rgba(132, 158, 255, 0.12);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+button:hover {
+  background: rgba(132, 158, 255, 0.2);
+  border-color: rgba(156, 199, 255, 0.6);
+}
+
+.rotation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.rotation-grid button {
+  margin-top: 0;
+}
+
+.viewport-wrap {
+  flex: 1;
+  position: relative;
+}
+
+#viewer {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #05070b, #0b1019);
+}
+
+canvas {
+  display: block;
+}
